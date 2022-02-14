@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author juandelacruz
+ * @author juanCruzDam
  */
 public class BoardScreen extends JPanel {
 

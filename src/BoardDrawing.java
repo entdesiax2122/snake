@@ -4,17 +4,22 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
 
 //note: board does not change dynamically 
 //note: board shape and window aesthetics to be set
 //note: unification of colors not done
+/**
+ * Clase BoardDrawing
+ * 
+ * @author Juan de la Cruz Sanchez Agudo     
+ * @version 1.01 - 14/02/2022          
+ * @since 1.0
+ * @see BoardScreen
+ * 
+ */
 public class BoardDrawing extends JPanel {
-
-    /**
-     *
-     */
+    
     int b = 0;
     int row = 8;
     int col = 8;
@@ -26,9 +31,14 @@ public class BoardDrawing extends JPanel {
     //ArrayList<Portal> portals;
     //ArrayList<Player> players;
 
+    /**
+     *
+     * @param row   filas
+     * @param col   columnas
+     * @param bs    BoardScreen
+     */
     public BoardDrawing(int row, int col, BoardScreen bs) {
         this.bs = bs;
-
         this.row = row;
         this.col = col;
         //player = 0;
@@ -65,6 +75,10 @@ public class BoardDrawing extends JPanel {
 
     }
 
+    /**
+     *
+     * @param g Graphics
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;//.create();
@@ -100,6 +114,10 @@ public class BoardDrawing extends JPanel {
 
     }
 
+    /**
+     * 
+     * @param g2d 
+     */
     private void drawSnakesAndLadders(Graphics2D g2d) {
         //Drawing snakes and ladders
         for (Portal port : bs.portals) {
@@ -129,7 +147,12 @@ public class BoardDrawing extends JPanel {
 
         }
     }
-
+    /** 
+     * 
+     * @param g2d
+     * @param cellWidth
+     * @param cellHeight 
+     */
     private void drawCellsAndNumbers(Graphics2D g2d, int cellWidth, int cellHeight) {
         //Draw cells and numbers
         //may have to modify program based on number of players
@@ -165,6 +188,14 @@ public class BoardDrawing extends JPanel {
         }
     }
 
+    /** 
+     * 
+     * @param xOffset
+     * @param cellWidth
+     * @param yOffset
+     * @param cellHeight
+     * @param g2d 
+     */
     private void drawRectangle(int xOffset, int cellWidth, int yOffset, int cellHeight, Graphics2D g2d) {
         if (cells.isEmpty()) {
             for (int i = 0; i < row; i++) {
@@ -198,6 +229,11 @@ public class BoardDrawing extends JPanel {
 		}
 	}
      */
+    /**
+     *
+     * @param pnos int
+     * @return message
+     */
     public String ensurePlayerPosition(int pnos) {
         String message = "";
         for (Portal port : bs.portals) {
@@ -217,6 +253,11 @@ public class BoardDrawing extends JPanel {
 	public void setPlayer(int a){
 		player = a;
 	}
+     */
+    /**
+     *
+     * @param a int
+     * @param pnos int
      */
     public void setPlayer(int a, int pnos) {
         bs.players.get(pnos).incPosition(a);
