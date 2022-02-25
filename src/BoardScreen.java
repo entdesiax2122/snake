@@ -29,8 +29,8 @@ public class BoardScreen extends JPanel {
     int currPlayer = 0;
     ArrayList<Portal> portals;
     ArrayList<Player> players;
-    int x;
-    int y;
+    int xBS;
+    int yBS;
     JLabel success;
     JButton roll;
 
@@ -51,31 +51,24 @@ public class BoardScreen extends JPanel {
         go = new JButton("New Game");
         quit = new JButton("Quit");
 
-        go.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                goButtonActionListener();
-            }
+        go.addActionListener((ActionEvent event) -> {
+            goButtonActionListener();
         });
 
-        quit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                quitButtonActionListener();
-            }
+        quit.addActionListener((ActionEvent event) -> {
+            quitButtonActionListener();
         });
 
         players = new ArrayList<Player>();
         players.add(new Player(currPlayer));
-        //for(int i = 0;i < returnMaxPlayers();i++)
-        //    players.add(new Player(i));
         //get and add player(s) names
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        x = y = 8;
+        xBS = yBS = 8;
 
-        bd = new BoardDrawing(x, y, this);
+        bd = new BoardDrawing(xBS, yBS, this);
         bd.setVisible(true);
-        //bd.setSize(getSize());
 
         int sw = getSize().width;
         int sh = getSize().height;
@@ -92,8 +85,6 @@ public class BoardScreen extends JPanel {
         stats.add(go);
         stats.add(quit);
 
-        //String playername = "Player 1";
-        //currPlayer = 0;
         whichPlayer = new JLabel();
         whichPlayer.setText(players.get(currPlayer).getName());
         stats.add(whichPlayer);
@@ -107,37 +98,27 @@ public class BoardScreen extends JPanel {
         //no need to create separate stores outside
         //may need more functions inside to communicate for this reason
         roll = new JButton("Roll the die!");
-        roll.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Random die = new Random();
-                int a = die.nextInt(6) + 1;
-                dieResults.setText("You rolled a " + a);
-                player += a;
-                //bd.setPlayer(player);
-                bd.setPlayer(a, currPlayer);
-                //bd.ensurePlayerPosition();
-                extraInfo.setText(bd.ensurePlayerPosition(currPlayer));
-                bd.repaint();
-
-                players.get(currPlayer).incPlayerScore(1);
-
-                for (Player p : players) {
-                    if (p.getPosition() >= x * y - 1) {
-                        success.setText("And the winner is: " + p.getName() + "\nYour score: " + p.getPlayerScore());
-                        roll.setVisible(false);
-                    }
+        Random die = new Random();
+        roll.addActionListener((ActionEvent e) -> {
+            int a1 = die.nextInt(6) + 1;
+            dieResults.setText("You rolled a " + a1);
+            player += a1;
+            bd.setPlayer(a1, currPlayer);
+            extraInfo.setText(bd.ensurePlayerPosition(currPlayer));
+            bd.repaint();
+            players.get(currPlayer).incPlayerScore(1);
+            for (Player p : players) {
+                if (p.getPosition() >= xBS * yBS - 1) {
+                    success.setText("And the winner is: " + p.getName() + "\nYour score: " + p.getPlayerScore());
+                    roll.setVisible(false);
                 }
-
-                if (currPlayer == maxPlayers - 1) {
-                    currPlayer = 0;
-                } else {
-                    currPlayer += 1;
-                }
-
-                //currPlayer = players.size() - 1;
-                whichPlayer.setText(players.get(currPlayer).getName());
-
             }
+            if (currPlayer == maxPlayers - 1) {
+                currPlayer = 0;
+            } else {
+                currPlayer += 1;
+            }
+            whichPlayer.setText(players.get(currPlayer).getName());
         });
         roll.setVisible(true);
 
@@ -165,7 +146,6 @@ public class BoardScreen extends JPanel {
      */
     public void goButtonActionListener() {
         mw.showCard("Two");
-        //mw.setBoard();
         mw.resetAll();
     }
 
