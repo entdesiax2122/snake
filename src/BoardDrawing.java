@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 //note: board does not change dynamically 
 //note: board shape and window aesthetics to be set
 //note: unification of colors not done
+
+/**
+ *
+ * @author Cristian y Ana
+ */
 public class BoardDrawing extends JPanel {
 
     /**
@@ -19,13 +24,19 @@ public class BoardDrawing extends JPanel {
     int row = 8;
     int col = 8;
     ArrayList<Rectangle> cells;
-    //int player;
+    int player;
     int[] cellnos;
 
     BoardScreen bs;
-    //ArrayList<Portal> portals;
-    //ArrayList<Player> players;
+//    ArrayList<Portal> portals;
+//    ArrayList<Player> players;
 
+    /**
+     *
+     * @param row
+     * @param col
+     * @param bs
+     */
     public BoardDrawing(int row, int col, BoardScreen bs) {
         this.bs = bs;
 
@@ -64,7 +75,10 @@ public class BoardDrawing extends JPanel {
         }
 
     }
-
+/**
+ * 
+ * @param g 
+ */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;//.create();
@@ -80,12 +94,21 @@ public class BoardDrawing extends JPanel {
 		g.drawLine(0,0,sw, sh);
          */
         //Create cells
+        /**
+         * 
+         */
         int width = getWidth();
         int height = getHeight();
 
+        /**
+         * 
+         */
         int cellWidth = width / col;
         int cellHeight = height / row;
 
+        /**
+         * 
+         */
         int xOffset = (width - (col * cellWidth)) / 2;
         int yOffset = (height - (row * cellHeight)) / 2;
 
@@ -163,7 +186,13 @@ public class BoardDrawing extends JPanel {
         }
 
     }
-
+/**
+ * 
+ * @param xOffset
+ * @param cellWidth
+ * @param yOffset
+ * @param cellHeight 
+ */
     private void ifandFor(int xOffset, int cellWidth, int yOffset, int cellHeight) {
         if (cells.isEmpty()) {
             for (int i = 0; i < row; i++) {
@@ -187,6 +216,13 @@ public class BoardDrawing extends JPanel {
 		}
 	}
      */
+
+    /**
+     *
+     * @param pnos
+     * @return
+     */
+
     public String ensurePlayerPosition(int pnos) {
         String message = "";
         for (Portal port : bs.portals) {
@@ -207,6 +243,13 @@ public class BoardDrawing extends JPanel {
 		player = a;
 	}
      */
+
+    /**
+     *
+     * @param a
+     * @param pnos
+     */
+
     public void setPlayer(int a, int pnos) {
         bs.players.get(pnos).incPosition(a);
     }
