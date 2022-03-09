@@ -9,9 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * @author sancobosm
+ */
 public class WelcomeScreen extends JPanel {
-
+   
     JLabel title;
     JButton go;
     JButton quit;
@@ -20,7 +23,10 @@ public class WelcomeScreen extends JPanel {
     private static final String QUIT = "Quit";
 
     MainWindow mw;
-
+/**
+ * 
+ * @param t 
+ */
     public void setTitle(String t) {
         title.setText(t);
     }
